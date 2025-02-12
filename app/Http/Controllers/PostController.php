@@ -6,7 +6,7 @@ use App\Models\Articles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class ArticleController extends Controller
+class PostController extends Controller
 {
     public function index()
     {

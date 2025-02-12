@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PostController;
 
 // Static pages
 $staticRoutes = [
@@ -25,5 +25,5 @@ $blogRoutes = [
 ];
 
 foreach ($blogRoutes as $route) {
-    Route::{$route['method']}($route['uri'], [ArticleController::class, $route['action']])->name($route['name']);
+    Route::{$route['method']}($route['uri'], [PostController::class, $route['action']])->name($route['name']);
 }
