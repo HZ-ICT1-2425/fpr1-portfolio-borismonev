@@ -2,28 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\FaqController;
 
 // Static pages
-$staticRoutes = [
-    '/' => 'welcome',
-    'profile' => 'profile',
-    'dashboard' => 'dashboard',
-    'faq' => 'faq',
-];
 
-foreach ($staticRoutes as $name => $view) {
+foreach (StaticPageController::getRoutes() as $name => $view) {
     Route::get("/{$name}", fn() => view($view))->name($name);
 }
 
-// Blog routes
-$blogRoutes = [
-    ['method' => 'get', 'uri' => 'blog/create', 'action' => 'create', 'name' => 'blog.create'],
-    ['method' => 'post', 'uri' => 'articles', 'action' => 'store', 'name' => 'articles.store'],
-    ['method' => 'get', 'uri' => 'blog', 'action' => 'index', 'name' => 'blog.index'],
-    ['method' => 'get', 'uri' => 'blog/{article:uri}', 'action' => 'show', 'name' => 'blog.show'],
-    ['method' => 'delete', 'uri' => 'blog/{article:uri}', 'action' => 'delete', 'name' => 'blog.delete'],
-];
+// Blog routing
+foreach (PostController::getRoutes() as $postRoute) {
+    Route::{$postRoute['method']}($postRoute['uri'], [PostController::class, $postRoute['action']])->name($postRoute['name']);
+}
 
-foreach ($blogRoutes as $route) {
-    Route::{$route['method']}($route['uri'], [PostController::class, $route['action']])->name($route['name']);
+// Faq routing
+foreach (FaqController::getRoutes() as $faqRoute) {
+    Route::{$faqRoute['method']}($faqRoute['uri'], [FaqController::class, $faqRoute['action']])->name($faqRoute['name']);
 }

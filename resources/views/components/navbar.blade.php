@@ -17,7 +17,7 @@
                 <a href="/dashboard"
                    class="navbar-item {{ Request::route()->getName() === 'dashboard' ? 'is-active' : '' }}">Dashboard</a>
                 <a href="/faq"
-                   class="navbar-item {{ Request::route()->getName() === 'faq' ? 'is-active' : '' }}">FAQ</a>
+                   class="navbar-item {{ Request::route()->getName() === 'faq.index' ? 'is-active' : '' }}">FAQ</a>
                 <a href="/blog"
                    class="navbar-item {{ Request::route()->getName() === 'blog.index' ? 'is-active' : '' }}">Blog</a>
             </div>

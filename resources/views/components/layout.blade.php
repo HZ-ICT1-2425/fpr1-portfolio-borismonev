@@ -3,16 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>
         {{
             Request::segment(2)
-                ? ucwords(str_replace('-', ' ', Request::segment(2)))
+                ? (Request::segment(3) === 'edit'
+                    ? ucwords(str_replace('-', ' ', Request::segment(2))) . ' Edit'
+                    : ucwords(str_replace('-', ' ', Request::segment(2))))
                 : (Request::segment(1)
                     ? ucwords(str_replace('-', ' ', Request::segment(1)))
                     : 'Home')
         }}
     </title>
+
 
     {{-- Compiled assets --}}
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

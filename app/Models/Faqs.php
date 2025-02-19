@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Articles extends Model
+class Faqs extends Model
 {
     protected $fillable = [
-        'title',
-        'author',
-        'short_description',
-        'text',
+        'question',
+        'answer',
         'uri'
     ];
 }

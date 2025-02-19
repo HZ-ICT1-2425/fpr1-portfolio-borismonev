@@ -10,13 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->timestamps();
-            $table->string('title');
-            $table->string('author');
-            $table->string('short_description');
-            $table->text('text');
+            $table->text('question');
+            $table->text('answer');
             $table->string('uri');
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('faq');
     }
 };

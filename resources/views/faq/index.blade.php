@@ -1,55 +1,46 @@
 <x-layout>
-    <h1>
-        Articles
-    </h1>
+    <h1>Frequently asked questions</h1>
     <br>
-
-    <a href="{{ route('blog.create') }}" class="button is-rounded is-dark">Create a new article</a>
+    <a href="{{ route('faq.create') }}" class="button is-rounded is-dark">Create a new FAQ</a>
     <hr>
     <div class="columns is-multiline is-mobile">
-        @foreach($articles as $article)
-            <div class="column is-one-third">
+        @foreach($faqs as $faq)
+            <div class="column is-full">
                 <div class="box">
                     <article class="media">
                         <div class="media-content">
-                            <span class="title is-4">{{$article->title}}</span>
-                            <br>
-                            <span class="subtitle is-6">{{$article->author}}</span>
+                            <span class="title is-4">{{$faq->question}}</span>
                             <div class="content">
                                 <br>
-                                <p>
-                                    {{$article->short_description}}
-                                    <a href="{{ route('blog.show', $article['uri']) }}"> <strong> Read
-                                            more </strong></a>
-                                </p>
+                                <p>{{$faq->answer}}</p>
                                 <br/>
-                                <time>{{$article->updated_at->format('F j, Y h:i A')}}</time>
+                                <time>{{$faq->updated_at->format('F j, Y h:i A')}}</time>
                             </div>
                         </div>
                         <div class="media-right">
                             <!-- Add unique data-target -->
                             <button class="delete js-modal-trigger"
-                                    data-target="modal-delete-{{$article->id}}"></button>
+                                    data-target="modal-delete-{{$faq->id}}"></button>
                             <br>
-                            <a href="{{ route('blog.edit', $article['uri']) }}">
+                            <a href="{{ route('faq.edit', $faq['uri']) }}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
                         </div>
                     </article>
                 </div>
             </div>
-
             <!-- Confirmation of deletion modal with unique id -->
-            <div id="modal-delete-{{$article->id}}" class="modal">
+            <div id="modal-delete-{{$faq->id}}" class="modal">
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title" style="text-align: center; text-indent: 0">Are you sure you want to
-                            delete this post? </p>
+                        <p class="modal-card-title" style="text-align: center; text-indent: 0">Are you sure you want
+                            to
+                            delete this FAQ? </p>
                     </header>
                     <footer class="modal-card-foot">
                         <div class="buttons">
-                            <form action="{{ route('blog.delete', $article['uri']) }}" method="POST">
+                            <form action="{{ route('faq.delete', ['faq' => $faq]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="button is-danger">Delete</button>
